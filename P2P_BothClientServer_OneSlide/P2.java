@@ -1,30 +1,27 @@
-package P2P_ClientServer;
-// 服务器端
+package P2P_BothClientServer_OneSlide;
+
 import java.io.*;
 import java.net.*;
 
-//public class Server {
-//}
-
-class Server {
+class P2 {
 
     public static void main(String[] args) throws IOException {
 
-        // 在端口5000上监听连接
+        // Listen for connections on port 5000
         ServerSocket server = new ServerSocket(5000);
 
-        // 接收客户端连接请求
+        // Accept a connection request from a client
         Socket socket = server.accept();
 
-        // 为每个客户端连接创建一个新的线程进行处理
+        // Create a new thread to handle each client connection
         new Thread(new ClientHandler(socket)).start();
 
-        // 关闭服务器端口
+        // Close the server socket
         server.close();
     }
 }
 
-// 客户端处理线程
+// Client handling thread
 class ClientHandler implements Runnable {
 
     private Socket socket;
@@ -38,27 +35,27 @@ class ClientHandler implements Runnable {
 
         try {
 
-            // 获取 socket 的输入流用于接收数据
+            // Get the InputStream of the socket for receiving data
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            // 获取 socket 的输出流用于发送数据
+            // Get the OutputStream of the socket for sending data
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
             while (true) {
 
-                // 读取客户端发送来的消息
+                // Read the message sent by the client
                 String message = in.readLine();
 
-                // 如果客户端发送"exit"则关闭连接
+                // If the client sends "exit," close the connection
                 if (message.equals("exit")) {
                     break;
                 }
 
-                // 打印接收到的消息
-                System.out.println("Client: " + message);
+                // Print the received message
+                System.out.println(message);
 
-                // 回复客户端
-                out.println("Message received");
+                // Reply to the client
+                out.println("P2: Message received");
             }
 
         } catch (IOException e) {

@@ -1,4 +1,4 @@
-package P2P_ClientServer;
+package P2P_ClientServer_OneSlide;
 import java.io.*;
 import java.net.*;
 
