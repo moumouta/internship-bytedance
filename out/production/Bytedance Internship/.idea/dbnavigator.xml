@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DatabaseBrowserManager">
@@ -13,25 +13,106 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="6ea8c4e7-c039-4423-9e78-a1295016886b">
-      <console name="Connection" type="STANDARD" schema="ucca" session="Main" />
+      <console name="Connection" type="STANDARD" schema="ucca" session="Main"><![CDATA[--Create User by Email
+INSERT INTO User (uid, phone_number, avatar, nickname, last_login_time)
+VALUES (10/*DEFAULT*/, '15811803568', 'default_avatar.jpg', 'New User', NULL);
+
+--Edit User Account Information
+UPDATE User
+SET nickname = 'Updated Nickname', avatar = 'new_avatar.jpg'
+WHERE uid = 10;
+
+--User Login
+-- Assuming phone_number_-based login for simplicity
+SELECT * FROM user WHERE phone_number = '15811803568';
+
+--Get Homepage News List for User
+SELECT * FROM content ORDER BY publish_datetime DESC LIMIT 10;
+
+/*
+--Browse News List by Section
+SELECT * FROM content WHERE section = 'Politics' ORDER BY publish_datetime DESC LIMIT 10;
+*/
+--There is no data in the Table, but it is OK. :)
+
+--Search News by Title and Content
+SELECT * FROM content
+WHERE title LIKE '%keyword%' OR content LIKE '%keyword%'
+ORDER BY publish_datetime DESC LIMIT 10;
+
+--Access News and Load Comments
+-- Assuming news_id = 10 for example
+SELECT * FROM content WHERE news_id = 10;
+SELECT * FROM comment WHERE news_id = 10;
+
+/*
+-- User Favorite and Share News
+-- Assuming user_id = 1 and news_id = 1 for example
+INSERT INTO User_Favorites (user_id, news_id) VALUES (1, 1);
+INSERT INTO User_Shares (user_id, news_id) VALUES (1, 1);
+*/
+--User_Favorites does not exit, but the code is ok if the Table exit.
+
+/*
+--User Comment on News
+-- Assuming user_id = 1, news_id = 1 for example
+INSERT INTO comment (user_id, news_id, comment_content, comment_time)
+VALUES (10, 1, 'Great news!', current_time() );
+*/ --Error executing INSERT statement. Field 'comment_id' doesn't have a default value
+
+--User Like/Dislike Comment
+-- Assuming comment_id = 1 for example
+UPDATE comment SET likes = likes + 1 WHERE comment_id = 1;
+-- or
+UPDATE comment SET dislikes = dislikes + 1 WHERE comment_id = 1;
+
+--User Delete Own Comment
+-- Assuming user_id = 1 and comment_id = 1 for example
+DELETE FROM comment WHERE user_id = 1 AND comment_id = 1;
+
+-- View User's Comment History
+-- Assuming user_id = 1 for example
+SELECT * FROM comment WHERE user_id = 1;
+
+/*
+-- View User's Browsing History
+-- Assuming user_id = 1 for example
+SELECT * FROM Browsing_History WHERE user_id = 1;
+*/ -- Table 'Browsing History' does not exist, but that is OK.
+
+-- (Simulated) Publish News
+INSERT INTO Content (news_id, title, content, publish_datetime)
+VALUES (10, 'New Breaking News', 'Content of breaking news...', current_time() );
+
+-- Get Ads by Content Type
+-- Assuming content_type = 'Politics' for example
+SELECT * FROM Advertisement WHERE content_type = 'Politics';
+
+-- Publish Advertisement
+INSERT INTO Advertisement (ad_title, ad_content, placement, advertiser_id, expiration_date, region_limit, device_limit, weight)
+VALUES ('New Ad Title', 'Ad content goes here...', 'Homepage', 'AdAgency1', '2023-12-31', 'US', 'Desktop', 10);]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="6ea8c4e7-c039-4423-9e78-a1295016886b" object-ref="consoles/Connection" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="6ea8c4e7-c039-4423-9e78-a1295016886b" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="6ea8c4e7-c039-4423-9e78-a1295016886b" dataset="ucca.advertisement" active-filter-id="" />
+    <filter-actions connection-id="6ea8c4e7-c039-4423-9e78-a1295016886b" dataset="ucca.content" active-filter-id="" />
+    <filter-actions connection-id="6ea8c4e7-c039-4423-9e78-a1295016886b" dataset="ucca.user" active-filter-id="" />
+    <filter-actions connection-id="6ea8c4e7-c039-4423-9e78-a1295016886b" dataset="ucca.comment" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
+  </component>
+  <component name="DBNavigator.Project.FileConnectionMappingManager">
+    <mapping file-url="file://$PROJECT_DIR$/MySQL/SQL_CRUD_Operation.sql" connection-id="6ea8c4e7-c039-4423-9e78-a1295016886b" session-id="MAIN" current-schema="ucca" />
   </component>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />
@@ -65,7 +146,7 @@
           <deprecated-pwd value="TU0=" />
         </database>
         <properties>
-          <auto-commit value="false" />
+          <auto-commit value="true" />
         </properties>
         <ssh-settings>
           <active value="false" />
@@ -535,5 +616,9 @@
         </visibility-settings>
       </environment>
     </general-settings>
+  </component>
+  <component name="DBNavigator.Project.StatementExecutionManager">
+    <execution-variables />
+    <execution-variable-types />
   </component>
 </project>

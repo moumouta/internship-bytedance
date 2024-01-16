@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Configuration for Press -->
+    <bean id="press1" class="com.bytedance.website.Press">
+        <property name="title" value="Press Title 1"/>
+        <property name="content" value="Press Content 1"/>
+        <property name="author" value="Author 1"/>
+    </bean>
+
+    <bean id="press2" class="com.bytedance.website.Press">
+        <property name="title" value="Press Title 2"/>
+        <property name="content" value="Press Content 2"/>
+        <property name="author" value="Author 2"/>
+    </bean>
+
+    <!-- Configuration for Ad -->
+    <bean id="ad1" class="com.bytedance.website.Ad">
+        <property name="title" value="Ad Title 1"/>
+        <property name="content" value="Ad Content 1"/>
+        <property name="imageUrl" value="Image URL 1"/>
+    </bean>
+
+    <bean id="ad2" class="com.bytedance.website.Ad">
+        <property name="title" value="Ad Title 2"/>
+        <property name="content" value="Ad Content 2"/>
+        <property name="imageUrl" value="Image URL 2"/>
+    </bean>
+
+    <!-- Configuration for Comments -->
+    <bean id="comments1" class="com.bytedance.website.Comments">
+        <property name="userId" value="User1"/>
+        <property name="commentId" value="Comment1"/>
+        <property name="newsId" value="News1"/>
+        <property name="commentContent" value="Comment Content 1"/>
+    </bean>
+
+    <bean id="comments2" class="com.bytedance.website.Comments">
+        <property name="userId" value="User2"/>
+        <property name="commentId" value="Comment2"/>
+        <property name="newsId" value="News2"/>
+        <property name="commentContent" value="Comment Content 2"/>
+    </bean>
+
+</beans>
