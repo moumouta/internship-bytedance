@@ -1,10 +1,10 @@
-package com.bytedance.press_REST;
+package com.bytedance.pressRestdatabaseVersion;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PressRestApplicationTests {
+class PressRestDatabaseVersionApplicationTests {
 
 	@Test
 	void contextLoads() {

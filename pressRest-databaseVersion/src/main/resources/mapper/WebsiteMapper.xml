@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bytedance.pressRestdatabaseVersion.mapper.WebsiteMapper">
+	<resultMap id="result" type="com.bytedance.pressRestdatabaseVersion.entity.Website">
+		<result column="id" jdbcType="INTEGER" property="id" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="url" jdbcType="VARCHAR" property="url" />
+		<result column="alexa" jdbcType="INTEGER" property="alexa" />
+		<result column="country" jdbcType="VARCHAR" property="country" />
+	</resultMap>
+
+	<select id="findAllWebsite" resultType="com.bytedance.pressRestdatabaseVersion.entity.Website">
+		select  * from websites;
+	</select>
+
+	<select id="findWebsiteById" resultType="com.bytedance.pressRestdatabaseVersion.entity.Website">
+		select * from websites where id=#{id};
+	</select>
+</mapper>
+
+<!--
+创建Mapper映射对应的WebsiteMapper.xml文件:
+注意存放的路径：（resources 目录下的mapper包中）
+写入WebsiteMapper.xml 代码(如上)
+-->
